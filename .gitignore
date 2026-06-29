@@ -1,62 +1,93 @@
-**/**/.env
 .DS_Store
-/.idea
-.claude/*
-!.claude/settings.json
-.cursor/debug-*.log
-**/**/node_modules/
-.cache
+# ─────────────────────────────────────────────────────────────────────────────
+# Repository-root .gitignore
+#
+# The vendored Twenty base CRM lives under `OffsideCRM-base/` and ships its own
+# `OffsideCRM-base/.gitignore`, which governs that subtree. Patterns here that
+# could collide with base source (build/, dist/, out/, coverage/) are anchored
+# with a leading "/" so they apply ONLY to the repo root, not recursively into
+# the base CRM or other sub-projects.
+# ─────────────────────────────────────────────────────────────────────────────
 
-# yarn is the recommended package manager across the project
-**/**/.package-lock.json
-
-.nx/installation
-.nx/cache
-.nx/workspace-data
-.nx/nxw.js
-
+# ── Dependencies ─────────────────────────────────────────────────────────────
+node_modules/
 .pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-.vercel
-.swc
+.yarn/cache
+.yarn/install-state.gz
 
-**/**/logs/**
-
-coverage
-dist
-storybook-static
+# ── Build / compiled output (root only; sub-projects manage their own) ───────
+/dist/
+/build/
+/out/
 *.tsbuildinfo
+
+# ── Caches (root only where the name is generic) ─────────────────────────────
+/.cache/
+/.nx/cache
+/.nx/workspace-data
+/.turbo/
+.eslintcache
 .oxlintcache
-.nyc_output
-test-results/
-dump.rdb
-.tinyb
+.swc/
 
-.notes
+# ── Environment & secrets ────────────────────────────────────────────────────
+# Catch real/secret env files (.env, .env.local, .env-prod, …) but keep the
+# committed examples/templates and base's shared .env.example / .env.test.
+.env
+.env.local
+.env.*.local
+.env-*
+!.env-*.example
+*.pem
+*.key
+secrets.*
+
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/logs/
+
+# ── Tests & coverage ─────────────────────────────────────────────────────────
+/coverage/
+.nyc_output/
+/test-results/
+
+# ── Python / Django (for _OffsideCRM-backend-django and any Python services) ─
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.sqlite3
+staticfiles/
+
+# ── OS files ─────────────────────────────────────────────────────────────────
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ── Editors & IDEs ───────────────────────────────────────────────────────────
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+
+# ── Claude Code (root only; keep shared settings) ────────────────────────────
+/.claude/*
+!/.claude/settings.json
+
+# ── Local scratch ────────────────────────────────────────────────────────────
 /data/
-/.devenv/
-/.direnv/
-/.pre-commit-config.yaml
-/.envrc
-/devenv.nix
-/flake.lock
-/flake.nix
-
-.crowdin.yml
-.react-email/
-
-mcp.json
-/.junie/
-/.agents/plugins/marketplace.json
-TRANSLATION_QA_REPORT.md
-.playwright-mcp/
-.playwright-cli/
-output/playwright/
-screenshots/
-!**/public/screenshots/
-!**/assets/screenshots/
+/tmp/
+*.local
+.notes

@@ -1,0 +1,95 @@
+{% extends 'core/base.html' %} {% load static %} {% block content %} {% load
+tailwind_filters %} {{ form|crispy }} {% load crispy_forms_tags %}
+<div class="max-w-6xl mx-auto px-6 xl:px-0">
+    <div>
+        <div class="sm:hidden">
+            <label for="tabs" class="sr-only">Select a tab</label>
+            <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+            <select
+                id="tabs"
+                name="tabs"
+                class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+            >
+                <option>Dashboard</option>
+                <option>Company</option>
+                <option selected>Team Members</option>
+                <option>Billing</option>
+            </select>
+        </div>
+        <div class="hidden sm:block">
+            <nav class="flex space-x-4" aria-label="Tabs">
+                <!-- Current: "bg-indigo-100 text-indigo-700", Default: "text-gray-500 hover:text-gray-700" -->
+                <a
+                    href="{% url 'dashboard' %}"
+                    class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium"
+                    aria-current="page"
+                    >Dashboard</a
+                >
+                <a
+                    href="{% url 'fleet' %}"
+                    class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium"
+                    >Fleet</a
+                >
+                <a
+                    href="{% url 'routes' %}"
+                    class="bg-indigo-100 text-indigo-700 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium"
+                    aria-current="page"
+                    >Routes</a
+                >
+                <a
+                    href="{% url 'stops' %}"
+                    class="text-gray-500 hover:text-gray-700 rounded-md px-3 py-2 text-sm font-medium"
+                    >Stops</a
+                >
+            </nav>
+        </div>
+    </div>
+    <br />
+    <div id="map" style="width: 1160px; height: 800px" class="py-12"></div>
+    <script>
+        mapboxgl.accessToken = "{{ mapbox_access_token }}";
+        const map = new mapboxgl.Map({
+            container: "map", // container ID
+            style: "mapbox://styles/mapbox/satellite-streets-v11", // style URL
+            center: [-79.3996762, 43.6456084], // starting position [lng, lat]
+            zoom: 12, // starting zoom
+        });
+
+        // Set marker options.
+        const marker1 = new mapboxgl.Marker({
+            color: "#FFFFFF",
+            draggable: true,
+        })
+            .setLngLat([-79.3983168, 43.6450924])
+            .addTo(map);
+
+        const marker2 = new mapboxgl.Marker({
+            color: "#FFFFFF",
+            draggable: true,
+        })
+            .setLngLat([-79.3983168, 43.6456084])
+            .addTo(map);
+
+        const marker3 = new mapboxgl.Marker({
+            color: "#FFFFFF",
+            draggable: true,
+        })
+            .setLngLat([-79.3983168, 43.6456084])
+            .addTo(map);
+
+        const marker4 = new mapboxgl.Marker({
+            color: "#FFFFFF",
+            draggable: true,
+        })
+            .setLngLat([-79.3983168, 43.6456084])
+            .addTo(map);
+
+        const marker5 = new mapboxgl.Marker({
+            color: "#FFFFFF",
+            draggable: true,
+        })
+            .setLngLat([-79.3983168, 43.6456084])
+            .addTo(map);
+    </script>
+</div>
+{% endblock %}
